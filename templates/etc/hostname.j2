@@ -1,0 +1,5 @@
+{% if hostname_fqdn | length > 0 -%}
+{{ hostname_fqdn.split(".")[0] }}
+{% else -%}
+{{ ansible_fqdn.split(".")[0] }}
+{% endif -%}

@@ -1,0 +1,4 @@
+---
+- name: set hostname interactive
+  command: "hostname -F /etc/hostname"
+  become: true

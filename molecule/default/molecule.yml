@@ -2,17 +2,22 @@
 dependency:
   name: galaxy
 driver:
-  name: docker
+  name: vagrant
+  provider:
+    name: virtualbox
 platforms:
   - name: hostnamecentos8
-    image: registry.gitlab.com/dvonessen/docker-molecule-nonroot/centos:8
-    pre_build_image: true
+    box: centos/8
+    box_version: 1905.1
+    memory: 2048
+    cpus: 2
+    provision: true
   - name: hostnamedebian10
-    image: registry.gitlab.com/dvonessen/docker-molecule-nonroot/debian:10
-    pre_build_image: true
-  - name: hostnameubuntu2004
-    image: registry.gitlab.com/dvonessen/docker-molecule-nonroot/ubuntu:20.04
-    pre_build_image: true
+    box: debian/buster64
+    box_version: 10.3.0
+    memory: 2048
+    cpus: 2
+    provision: true
 provisioner:
   name: ansible
   config_options:

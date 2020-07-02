@@ -5,3 +5,7 @@
   debugger: on_failed
   roles:
     - role: ansible-role-hostname
+      vars:
+        hostname_fqdn: "test-{{ ansible_distribution | lower }}.example.com"
+        hostname_hosts:
+          192.168.1.222: test-foobar.com

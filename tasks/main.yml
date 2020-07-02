@@ -1,1 +1,6 @@
 ---
+- name: import hostname.yml
+  import_tasks: hostname.yml
+  become: true
+  tags:
+    hostname_all

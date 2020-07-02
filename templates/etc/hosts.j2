@@ -1,0 +1,32 @@
+# {{ ansible_managed }}
+
+# IPv4
+127.0.0.1 localhost
+{% if ansible_all_ipv4_addresses | length > 0 %}
+{% for ipv4_address in ansible_all_ipv4_addresses -%}
+{% if ipv4_address not in hostname_hosts %}
+{{ ipv4_address }} {{ hostname_fqdn.split(".")[0] }} {{ hostname_fqdn }}
+{% else -%}
+{% set _hostname=hostname_hosts.pop(ipv4_address) %}
+{{ ipv4_address }} {{ _hostname.split(".")[0] }} {{ _hostname }}
+{% endif -%}
+{% endfor -%}
+{% endif %}
+
+# IPv6
+::1 localhost ip6-localhost ip6-loopback
+{% if ansible_all_ipv6_addresses | length > 0 -%}
+{% for ipv6_address in ansible_all_ipv6_addresses -%}
+{% if ipv6_address not in hostname_hosts %}
+{{ ipv6_address }} {{ hostname_fqdn.split(".")[0] }} {{ hostname_fqdn }}
+{% else -%}
+{% set _hostname=hostname_hosts.pop(ipv6_address) %}
+{{ ipv6_address }} {{ _hostname.split(".")[0] }} {{ _hostname }}
+{% endif -%}
+{% endfor -%}
+{%- endif %}
+
+# Hosts pointing to other machines
+{% for ip, hostname in hostname_hosts.items() -%}
+{{ ip }} {{ hostname.split(".")[0] }} {{ hostname }}
+{% endfor -%}
