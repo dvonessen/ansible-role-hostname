@@ -1,0 +1,7 @@
+---
+- name: install neccessary packages
+  package:
+    name: "{{ _hostname_packages }}"
+    state: present
+  when:
+    - (_hostname_packages is defined and _hostname_packages | length > 0)
