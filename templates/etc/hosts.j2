@@ -2,7 +2,7 @@
 
 # IPv4
 127.0.0.1 localhost
-{% set _hostname_fqdn = hostname_fqdn | string | trim %}}
+{% set _hostname_fqdn = hostname_fqdn | string | trim %}
 {% if ansible_all_ipv4_addresses | length > 0 %}
 {% for ipv4_address in ansible_all_ipv4_addresses -%}
 {% if ipv4_address not in hostname_hosts %}
